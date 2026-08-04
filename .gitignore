@@ -1,0 +1,22 @@
+# Node.js
+node_modules/
+
+# Variables de entorno
+.env
+backend/.env
+fronted/.env
+
+# Logs
+*.log
+
+# Dependencias
+backend/node_modules/
+fronted/node_modules/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/

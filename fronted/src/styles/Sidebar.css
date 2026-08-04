@@ -1,0 +1,88 @@
+.sidebar {
+    width: 280px;
+    background: white;
+    border-right: 1px solid #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.logo-panel {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-sidebar {
+    width: 120px;
+}
+
+.logo-panel h3 {
+    margin-top: 10px;
+    color: #1976d2;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: #444;
+    padding: 14px 16px;
+    border-radius: 12px;
+    transition: .2s;
+    min-height: 52px;
+    box-sizing: border-box;
+
+}
+
+.sidebar nav a svg {
+    font-size: 20px;
+}
+
+.sidebar nav a:hover {
+    background: #1976d2;
+    color: white;
+}
+
+.sidebar nav a.active {
+    background: #1976d2;
+    color: white;
+}
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 16px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: #444;
+    cursor: pointer;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: .2s;
+}
+
+.logout-button:hover {
+    background: #d32f2f;
+    color: white;
+}
+
+.logout-button svg {
+    font-size: 20px;
+}
+
+.sidebar nav a span {
+    white-space: nowrap;
+}
