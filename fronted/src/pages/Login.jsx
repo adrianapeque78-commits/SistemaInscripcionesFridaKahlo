@@ -12,7 +12,7 @@ function Login() {
 
     try {
 
-      const respuesta = await fetch("http://localhost:3001/auth/login", {
+      const respuesta = await fetch("https://sistemainscripcionesfridakahlo.onrender.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
