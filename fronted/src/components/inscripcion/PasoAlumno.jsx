@@ -9,7 +9,7 @@ function PasoAlumno({ inscripcion, setInscripcion }) {
     const cargarDatos = async () => {
         try {
 
-            const respuestaCiclos = await fetch("http://localhost:3001/inscripciones/ciclos");
+            const respuestaCiclos = await fetch("https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/ciclos");
             const datosCiclos = await respuestaCiclos.json();
 
             setCiclos(datosCiclos);

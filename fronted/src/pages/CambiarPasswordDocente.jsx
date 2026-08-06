@@ -32,7 +32,7 @@ function CambiarPasswordDocente() {
                 onClick={async () => {
 
                     const respuesta = await fetch(
-                        `http://localhost:3001/docentes/${id}/password`,
+                        `https://sistemainscripcionesfridakahlo.onrender.com/docentes/${id}/password`,
                         {
                             method: "PUT",
                             headers: {

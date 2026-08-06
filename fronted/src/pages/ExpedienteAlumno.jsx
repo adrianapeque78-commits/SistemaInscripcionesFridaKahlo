@@ -11,7 +11,7 @@ function ExpedienteAlumno() {
     console.log("CONTACTOS:", alumno?.contactos);
 
     useEffect(() => {
-        fetch(`http://localhost:3001/inscripciones/${id}`)
+        fetch(`https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}`)
             .then((res) => res.json())
             .then((data) => {
 

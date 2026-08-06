@@ -14,7 +14,7 @@ function EditarDocente() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:3001/docentes/${id}`)
+        fetch(`https://sistemainscripcionesfridakahlo.onrender.com/docentes/${id}`)
             .then(res => res.json())
             .then(data => setDocente(data))
             .catch(console.error);
@@ -88,7 +88,7 @@ function EditarDocente() {
                 onClick={async () => {
 
                     const respuesta = await fetch(
-                        `http://localhost:3001/docentes/${id}`,
+                        `https://sistemainscripcionesfridakahlo.onrender.com/docentes/${id}`,
                         {
                             method: "PUT",
                             headers: {

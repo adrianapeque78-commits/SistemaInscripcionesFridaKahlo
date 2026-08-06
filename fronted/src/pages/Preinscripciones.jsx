@@ -71,7 +71,7 @@ function Preinscripciones() {
         try {
 
             const respuesta = await fetch(
-                "http://localhost:3001/inscripciones"
+                "https://sistemainscripcionesfridakahlo.onrender.com/inscripciones"
             );
 
             const datos = await respuesta.json();
@@ -89,7 +89,7 @@ function Preinscripciones() {
 
         cargarPreinscripciones();
 
-        fetch("http://localhost:3001/inscripciones/grupos")
+        fetch("https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/grupos")
             .then(res => res.json())
             .then(data => {
 
@@ -190,7 +190,7 @@ function Preinscripciones() {
                             onClick={async () => {
 
                                 const respuesta = await fetch(
-                                    `http://localhost:3001/inscripciones/${alumnoSeleccionado.id}/grupo`,
+                                    `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${alumnoSeleccionado.id}/grupo`,
                                     {
                                         method: "PUT",
                                         headers: {

@@ -80,7 +80,7 @@ function NuevoDocente() {
                 onClick={async () => {
 
                     const respuesta = await fetch(
-                        "http://localhost:3001/docentes",
+                        "https://sistemainscripcionesfridakahlo.onrender.com/docentes",
                         {
                             method: "POST",
                             headers: {

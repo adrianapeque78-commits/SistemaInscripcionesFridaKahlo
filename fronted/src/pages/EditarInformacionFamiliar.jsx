@@ -13,7 +13,7 @@ function EditarInformacionFamiliar() {
     console.log("ALUMNO:", alumno);
     useEffect(() => {
 
-        fetch(`http://localhost:3001/inscripciones/${id}`)
+        fetch(`https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}`)
             .then(res => res.json())
             .then(data => setAlumno(data))
             .catch(err => console.error(err));
@@ -122,7 +122,7 @@ function EditarInformacionFamiliar() {
                 <button
                     onClick={async () => {
                         const respuesta = await fetch(
-                            `http://localhost:3001/inscripciones/${id}/documentacion`,
+                            `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}/documentacion`,
                             {
                                 method: "PUT",
                                 headers: {
@@ -337,7 +337,7 @@ function EditarInformacionFamiliar() {
                         setGuardando(true);
 
                         const respuesta = await fetch(
-                            `http://localhost:3001/inscripciones/${id}/documentacion`,
+                            `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}/documentacion`,
                             {
                                 method: "PUT",
                                 headers: {

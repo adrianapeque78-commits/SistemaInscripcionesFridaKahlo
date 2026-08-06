@@ -54,7 +54,7 @@ function Inscripciones() {
 
         const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-        let url = "http://localhost:3001/inscripciones";
+        let url = "https://sistemainscripcionesfridakahlo.onrender.com/inscripciones";
 
         if (usuario.rol_id === 2) {
             url += `?grupo_id=${usuario.grupo_id}`;

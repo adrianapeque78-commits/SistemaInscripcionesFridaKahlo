@@ -13,7 +13,7 @@ function PasoConfirmacion({ inscripcion }) {
 
         try {
 
-            const respuesta = await fetch("http://localhost:3001/inscripciones", {
+            const respuesta = await fetch("https://sistemainscripcionesfridakahlo.onrender.com/inscripciones", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
