@@ -719,7 +719,7 @@ const actualizarDocumentacion = async (req, res) => {
                 cartilla_vacunacion,
                 ine_tutor,
                 comprobante_domicilio,
-                
+
                 id
             ]
         );
@@ -739,7 +739,39 @@ const actualizarDocumentacion = async (req, res) => {
     }
 
 };
+const obtenerAlumnos = async (req, res) => {
 
+    try {
+
+        const resultado = await pool.query(`
+            SELECT
+                a.id,
+                a.folio,
+                CONCAT(
+                    a.nombre,' ',
+                    a.apellido_paterno,' ',
+                    a.apellido_materno
+                ) AS nombre,
+                g.nombre AS grupo
+            FROM alumnos a
+            INNER JOIN grupos g
+                ON g.id = a.grupo_id
+            ORDER BY g.nombre, a.apellido_paterno, a.nombre
+        `);
+
+        res.json(resultado.rows);
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            mensaje: error.message
+        });
+
+    }
+
+};
 module.exports = {
     guardarInscripcion,
     obtenerGrupos,
@@ -748,5 +780,6 @@ module.exports = {
     obtenerExpediente,
     actualizarInformacionFamiliar,
     asignarGrupo,
-    actualizarDocumentacion
+    actualizarDocumentacion,
+    obtenerAlumnos
 };

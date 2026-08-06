@@ -9,12 +9,14 @@ const {
     obtenerExpediente,
     actualizarInformacionFamiliar,
     asignarGrupo,
-    actualizarDocumentacion
+    actualizarDocumentacion,
+    obtenerAlumnos
 } = require("../controllers/inscripcionesController");
 
 router.get("/grupos", obtenerGrupos);
 router.get("/ciclos", obtenerCiclos);
 router.get("/", obtenerInscripciones);
+router.get("/alumnos", obtenerAlumnos);
 router.get("/:id", obtenerExpediente);
 
 router.put(

@@ -1,36 +1,57 @@
-import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { useEffect, useState } from "react";
 
 function Alumnos() {
+
+  const [alumnos, setAlumnos] = useState([]);
+
+  useEffect(() => {
+    fetch("https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/alumnos")
+      .then(res => res.json())
+      .then(data => setAlumnos(data))
+      .catch(console.error);
+  }, []);
+
   return (
     <div style={{ padding: "30px" }}>
 
-      <div
+      <h1>Alumnos</h1>
+
+      <p>Alumnos inscritos oficialmente.</p>
+
+      <table
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "30px"
+          width: "100%",
+          borderCollapse: "collapse",
+          marginTop: "20px"
         }}
       >
-        <div>
-          <h1>Alumnos</h1>
-          <p>Alumnos inscritos oficialmente en el ciclo escolar.</p>
-        </div>
+        <thead>
+          <tr>
+            <th>Folio</th>
+            <th>Nombre</th>
+            <th>Grupo</th>
+          </tr>
+        </thead>
 
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-        >
-          Nuevo alumno
-        </Button>
+        <tbody>
 
-      </div>
+          {alumnos.map((alumno) => (
 
-      <p>Aquí aparecerá la lista de alumnos.</p>
+            <tr key={alumno.id}>
+              <td>{alumno.folio}</td>
+              <td>{alumno.nombre}</td>
+              <td>{alumno.grupo}</td>
+            </tr>
+
+          ))}
+
+        </tbody>
+
+      </table>
 
     </div>
   );
+
 }
 
 export default Alumnos;
