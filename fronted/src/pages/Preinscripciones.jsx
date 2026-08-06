@@ -10,6 +10,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import SchoolIcon from "@mui/icons-material/School";
+import AddIcon from "@mui/icons-material/Add";
 function Preinscripciones() {
     const navigate = useNavigate();
     const [filas, setFilas] = useState([]);
@@ -106,6 +107,21 @@ function Preinscripciones() {
 
             <h1>Preinscripciones</h1>
             <p>Total de registros: {filas.length}</p>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginBottom: "20px"
+                }}
+            >
+                <Button
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={() => navigate("/dashboard/formulario-inscripcion")}
+                >
+                    Nueva preinscripción
+                </Button>
+            </div>
             <div className="tabla">
 
                 <DataGrid
