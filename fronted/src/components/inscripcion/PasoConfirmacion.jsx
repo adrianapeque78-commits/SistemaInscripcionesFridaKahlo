@@ -43,7 +43,7 @@ Ese día deberá acudir con la documentación y copias solicitadas por el Jardí
 
         setConfirmado(false);
 
-        window.location.reload();
+        window.location.href = "/inscripcion";
 
     } catch (error) {
 
