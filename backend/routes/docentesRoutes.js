@@ -112,7 +112,7 @@ router.get("/:id", async (req, res) => {
                 usuario,
                 grupo_id,
                 rol_id
-            FROM usuarios
+            FROM public.usuarios
             WHERE id = $1
             `,
             [id]

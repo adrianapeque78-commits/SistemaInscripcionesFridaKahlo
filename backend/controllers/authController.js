@@ -15,7 +15,7 @@ const login = async (req, res) => {
                 u.rol_id,
                 u.grupo_id,
                 u.activo
-            FROM usuarios u
+            FROM public.usuarios u
             WHERE u.usuario = $1
             AND u.password = $2
             AND u.activo = TRUE
