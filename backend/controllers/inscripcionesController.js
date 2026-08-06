@@ -410,13 +410,6 @@ const obtenerExpediente = async (req, res) => {
     a.fecha_nacimiento,
     a.sexo,
 
-    a.acta_nacimiento,
-    a.curp_entregado,
-    a.cartilla_vacunacion,
-    a.ine_tutor,
-    a.comprobante_domicilio,
-    
-
     d.calle,
     d.numero,
     d.colonia,
