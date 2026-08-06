@@ -51,11 +51,16 @@ function FormularioInscripcion() {
     });
     return (
         <div className="formulario">
-            <div
-                className="formulario"
-                style={{ maxWidth: "900px", margin: "40px auto" }}
-            ></div>
-            <h1>Preinscripción Ciclo Escolar 2026-2027</h1>
+
+            <h2
+                style={{
+                    textAlign: "center",
+                    marginBottom: "10px",
+                    fontSize: "2rem"
+                }}
+            >
+                Preinscripción Ciclo Escolar 2026-2027
+            </h2>
             <p
                 style={{
                     textAlign: "center",
@@ -65,7 +70,14 @@ function FormularioInscripcion() {
             >
                 Jardín de Niños Frida Kahlo
             </p>
-            <p>Llene todos los campos para finalizar su preinscripción.</p>
+            <p
+                style={{
+                    textAlign: "center",
+                    marginBottom: "25px"
+                }}
+            >
+                Llene todos los campos para finalizar su preinscripción.
+            </p>
 
             <div className="card-form">
 
@@ -146,7 +158,6 @@ function FormularioInscripcion() {
                                     return false;
                                 }
 
-                                return true;
                                 if (!inscripcion.alumno.apellidoPaterno?.trim()) {
                                     alert("Capture el apellido paterno del alumno.");
                                     return false;
@@ -176,6 +187,8 @@ function FormularioInscripcion() {
                                     alert("Seleccione el ciclo escolar.");
                                     return false;
                                 }
+
+                                return true;
                             };
                             if (paso === 1 && !validarPaso1()) {
 

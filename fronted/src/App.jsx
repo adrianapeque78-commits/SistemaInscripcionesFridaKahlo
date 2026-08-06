@@ -22,12 +22,11 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route
         path="/inscripcion"
-        element={<FormularioInscripcion />}
+        
       />
       <Route path="/dashboard" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="preinscripciones" element={<Preinscripciones />} />
-        <Route path="formulario-inscripcion" element={<FormularioInscripcion />} />
         <Route path="alumnos" element={<Alumnos />} />
         <Route path="docentes" element={<Docentes />} />
         <Route path="docentes/nuevo" element={<NuevoDocente />} />

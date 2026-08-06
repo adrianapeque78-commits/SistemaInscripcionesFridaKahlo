@@ -117,7 +117,7 @@ function Preinscripciones() {
                 <Button
                     variant="contained"
                     startIcon={<AddIcon />}
-                    onClick={() => navigate("/dashboard/formulario-inscripcion")}
+                    onClick={() => navigate("/inscripcion")}
                 >
                     Nueva preinscripción
                 </Button>
