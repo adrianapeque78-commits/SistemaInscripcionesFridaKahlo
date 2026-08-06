@@ -47,6 +47,7 @@ function ExpedienteAlumno() {
                             >
                                 Expediente de Preinscripción
                             </h1>
+
                             <p style={{ margin: "8px 0 0 0", color: "#666" }}>
                                 Folio: {alumno.folio}
                             </p>
@@ -54,7 +55,7 @@ function ExpedienteAlumno() {
 
                         <div style={{ display: "flex", gap: "10px" }}>
 
-                            <button onClick={() => navigate("/dashboard/inscripciones")}>
+                            <button onClick={() => navigate("/dashboard/preinscripciones")}>
                                 Regresar
                             </button>
 
