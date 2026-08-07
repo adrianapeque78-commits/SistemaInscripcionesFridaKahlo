@@ -438,6 +438,14 @@ const obtenerExpediente = async (req, res) => {
     s.institucion,
     s.numero_afiliacion,
 
+    doc.acta,
+    doc.curp,
+    doc.hoja_asignacion,
+    doc.ine_madre,
+    doc.ine_padre,
+    doc.comprobante,
+    doc.observaciones,
+
     g.nombre AS grupo,
     c.nombre AS ciclo
 

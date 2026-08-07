@@ -122,7 +122,7 @@ function EditarInformacionFamiliar() {
                 <button
                     onClick={async () => {
                         const respuesta = await fetch(
-                            `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}/informacion-familiar`,
+                            `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}/documentacion`,
                             {
                                 method: "PUT",
                                 headers: {
@@ -337,7 +337,8 @@ function EditarInformacionFamiliar() {
                         setGuardando(true);
 
                         const respuesta = await fetch(
-                            `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}/documentacion`,
+
+                            `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}/informacion-familiar`,
                             {
                                 method: "PUT",
                                 headers: {
