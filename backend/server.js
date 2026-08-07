@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const pool = require("./database/connection");
-
+const listadosRoutes = require("./routes/listadosRoutes");
 const ruta = require.resolve("./routes/inscripcionesRoutes");
 console.log("Cargando rutas desde:", ruta);
 
@@ -18,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 console.log("Rutas de inscripciones cargadas");
 app.use("/inscripciones", inscripcionesRoutes);
+app.use("/listados", listadosRoutes);
 app.use("/auth", authRoutes);
 app.use("/docentes", docentesRoutes);
 app.get("/prueba", (req, res) => {
