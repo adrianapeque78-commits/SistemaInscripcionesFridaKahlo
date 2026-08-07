@@ -59,18 +59,20 @@ function ExpedienteAlumno() {
                                 Regresar
                             </button>
 
-                            {usuario.rol_id === 1 ? (
-                                <button
-                                    onClick={() => navigate(`/dashboard/expediente/${id}/documentacion`)}
-                                >
-                                    Documentación
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={() => navigate(`/dashboard/expediente/${id}/editar`)}
-                                >
-                                    Editar información familiar
-                                </button>
+                            {usuario.rol_id === 1 && (
+                                <>
+                                    <button
+                                        onClick={() => navigate(`/dashboard/expediente/${id}/documentacion`)}
+                                    >
+                                        Documentación
+                                    </button>
+
+                                    <button
+                                        onClick={() => navigate(`/dashboard/expediente/${id}/editar`)}
+                                    >
+                                        Editar información
+                                    </button>
+                                </>
                             )}
 
                         </div>

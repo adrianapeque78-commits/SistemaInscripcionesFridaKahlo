@@ -703,15 +703,14 @@ const actualizarDocumentacion = async (req, res) => {
 
         await pool.query(
             `
-            UPDATE alumnos
+            UPDATE documentacion
             SET
-                acta_nacimiento = $1,
-                curp_entregado = $2,
-                cartilla_vacunacion = $3,
-                ine_tutor = $4,
-                comprobante_domicilio = $5
-                
-            WHERE id = $6
+                acta = $1,
+                curp = $2,
+                hoja_asignacion = $3,
+                ine_madre = $4,
+                comprobante = $5
+            WHERE alumno_id = $6
             `,
             [
                 acta_nacimiento,
@@ -719,7 +718,6 @@ const actualizarDocumentacion = async (req, res) => {
                 cartilla_vacunacion,
                 ine_tutor,
                 comprobante_domicilio,
-
                 id
             ]
         );
