@@ -471,6 +471,9 @@ LEFT JOIN tutores tp
 LEFT JOIN salud s
     ON s.alumno_id = a.id
 
+LEFT JOIN documentacion doc
+ON doc.alumno_id = a.id
+
 LEFT JOIN grupos g
     ON g.id = a.grupo_id
 

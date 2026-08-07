@@ -15,7 +15,16 @@ function EditarInformacionFamiliar() {
 
         fetch(`https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}`)
             .then(res => res.json())
-            .then(data => setAlumno(data))
+            .then(data =>
+                setAlumno({
+                    ...data,
+                    acta_nacimiento: data.acta,
+                    curp_entregado: data.curp,
+                    cartilla_vacunacion: data.hoja_asignacion,
+                    ine_tutor: data.ine_madre,
+                    comprobante_domicilio: data.comprobante
+                })
+            )
             .catch(err => console.error(err));
 
     }, [id]);
