@@ -56,9 +56,9 @@ function Sidebar() {
                             <span>Docentes</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/reportes">
+                        <NavLink to="/dashboard/listados">
                             <FaChartBar />
-                            <span>Reportes</span>
+                            <span>Listados</span>
                         </NavLink>
 
                         <NavLink to="/dashboard/configuracion">

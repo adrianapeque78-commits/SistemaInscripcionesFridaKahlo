@@ -1,3 +1,4 @@
+import Listados from "./pages/Listados";
 import { Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -36,6 +37,10 @@ function App() {
         <Route
           path="preinscripciones"
           element={<Preinscripciones />}
+        />
+        <Route
+          path="listados"
+          element={<Listados />}
         />
 
         <Route
