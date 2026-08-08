@@ -31,7 +31,7 @@ function Listados() {
                 return;
             }
 
-            const doc = new jsPDF();
+            const doc = new jsPDF(); 
 
             const alumno = listaAlumnos.find(
                 a => String(a.id) === String(alumnoSeleccionado.id)
@@ -111,6 +111,91 @@ function Listados() {
             doc.save(
                 `Directorio-${alumno.apellido_paterno || ""}-${alumno.nombre || ""}.pdf`
             );
+
+            return;
+        }
+        if (tipo === "documentacion") {
+
+            const doc = new jsPDF("landscape", "mm", "a3");
+
+            const nombreGrupo =
+                grupos.find(g => String(g.id) === String(grupo))?.nombre || "";
+
+            doc.setFontSize(16);
+            doc.text("Jardín de Niños Frida Kahlo", 105, 20, {
+                align: "center"
+            });
+
+            doc.setFontSize(13);
+            doc.text(`Documentación Pendiente - ${nombreGrupo}`, 105, 28, {
+                align: "center"
+            });
+
+            autoTable(doc, {
+
+                startY: 38,
+
+                head: [[
+                    "No.",
+                    "Folio",
+                    "Alumno",
+                    "Acta",
+                    "CURP",
+                    "Hoja asignación",
+                    "INE madre",
+                    "INE padre",
+                    "Comprobante"
+                ]],
+
+                body: listaAlumnos.map((alumno, index) => [
+
+                    index + 1,
+
+                    alumno.folio || "",
+
+                    `${alumno.apellido_paterno || ""} ${alumno.apellido_materno || ""}, ${alumno.nombre || ""}`,
+
+                    alumno.acta ? "ENTREGADO" : "PENDIENTE",
+
+                    alumno.doc_curp ? "ENTREGADO" : "PENDIENTE",
+
+                    alumno.hoja_asignacion ? "ENTREGADO" : "PENDIENTE",
+
+                    alumno.ine_madre ? "ENTREGADO" : "PENDIENTE",
+
+                    alumno.ine_padre ? "ENTREGADO" : "PENDIENTE",
+
+                    alumno.comprobante ? "ENTREGADO" : "PENDIENTE"
+
+                ]),
+
+                styles: {
+                    fontSize: 9,
+                    cellPadding: 3,
+                    overflow: "linebreak",
+                    valign: "middle"
+                },
+
+                headStyles: {
+                    fontSize: 7,
+                    halign: "center"
+                },
+
+                columnStyles: {
+                    0: { cellWidth: 12 },
+                    1: { cellWidth: 28 },
+                    2: { cellWidth: 65 },
+                    3: { cellWidth: 40 },
+                    4: { cellWidth: 40 },
+                    5: { cellWidth: 50 },
+                    6: { cellWidth: 45 },
+                    7: { cellWidth: 45 },
+                    8: { cellWidth: 50 }
+                }
+
+            });
+
+            doc.save(`Documentacion-Pendiente-${nombreGrupo}.pdf`);
 
             return;
         }
