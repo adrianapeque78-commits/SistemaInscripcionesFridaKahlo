@@ -56,3 +56,43 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
+
+/* ADAPTACIÓN PARA CELULAR */
+@media (max-width: 700px) {
+
+  .formulario {
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .card-form {
+    padding: 20px 15px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .grid div {
+    width: 100%;
+  }
+
+  input,
+  select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .botones {
+    gap: 15px;
+  }
+
+  .botones button {
+    flex: 1;
+    padding: 12px 15px;
+  }
+}
