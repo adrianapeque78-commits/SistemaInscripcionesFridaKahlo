@@ -41,6 +41,11 @@ function App() {
         <Route
           path="listados"
           element={<Listados />}
+          
+        />
+        <Route
+          path="reportes"
+          element={<Reportes />}
         />
 
         <Route

@@ -1,0 +1,133 @@
+.reportes {
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.reportes h1 {
+    margin-bottom: 5px;
+    font-size: 32px;
+}
+
+.reportes .subtitulo {
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #666;
+    font-size: 17px;
+}
+
+.reportes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.reporte-card {
+    background: white;
+    border: 1px solid #e2e2e2;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.reporte-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.reporte-card h3 {
+    margin-top: 25px;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.reporte-datos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.reporte-datos div {
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+
+.reporte-datos span {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.reporte-datos strong {
+    display: block;
+    font-size: 28px;
+}
+
+.tabla-reporte {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.fila {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #ddd;
+}
+
+.fila:last-child {
+    border-bottom: none;
+}
+
+.fila span {
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+
+.fila span:last-child {
+    border-right: none;
+}
+
+.fila.encabezado {
+    font-weight: bold;
+    background: #f2f2f2;
+}
+
+.reporte-card-grupos {
+    grid-column: span 2;
+}
+
+.botones-reportes {
+    display: flex;
+    gap: 15px;
+}
+
+.botones-reportes button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+@media (max-width: 900px) {
+
+    .reportes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reporte-card-grupos {
+        grid-column: span 1;
+    }
+
+    .reporte-datos {
+        grid-template-columns: 1fr;
+    }
+
+}

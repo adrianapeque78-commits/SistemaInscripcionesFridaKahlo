@@ -60,7 +60,11 @@ function Sidebar() {
                             <FaChartBar />
                             <span>Listados</span>
                         </NavLink>
-
+                        <NavLink to="/dashboard/reportes">
+                            <FaChartBar />
+                            <span>Reportes</span>
+                        </NavLink>
+                        
                         <NavLink to="/dashboard/configuracion">
                             <FaCog />
                             <span>Configuración</span>
