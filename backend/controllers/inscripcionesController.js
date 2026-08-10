@@ -749,24 +749,57 @@ const actualizarDocumentacion = async (req, res) => {
 
 };
 const obtenerAlumnos = async (req, res) => {
-
+console.log("### ENTRO A obtenerAlumnos NUEVA ###");
     try {
 
-        const resultado = await pool.query(`
+        const { grupo_id } = req.query;
+
+        let consulta = `
             SELECT
                 a.id,
                 a.folio,
-                CONCAT(
-                    a.nombre,' ',
-                    a.apellido_paterno,' ',
-                    a.apellido_materno
-                ) AS nombre,
-                g.nombre AS grupo
+                a.nombre,
+                a.apellido_paterno,
+                a.apellido_materno,
+                g.id AS grupo_id,
+                g.nombre AS grupo,
+
+                COALESCE(doc.acta, false) AS acta,
+                COALESCE(doc.curp, false) AS curp,
+                COALESCE(doc.hoja_asignacion, false) AS hoja_asignacion,
+                COALESCE(doc.ine_madre, false) AS ine_madre,
+                COALESCE(doc.ine_padre, false) AS ine_padre,
+                COALESCE(doc.comprobante, false) AS comprobante
+
             FROM alumnos a
+
             INNER JOIN grupos g
                 ON g.id = a.grupo_id
-            ORDER BY g.nombre, a.apellido_paterno, a.nombre
-        `);
+
+            LEFT JOIN documentacion doc
+                ON doc.alumno_id = a.id
+        `;
+
+        const parametros = [];
+
+        if (grupo_id) {
+
+            consulta += `
+                WHERE a.grupo_id = $1
+            `;
+
+            parametros.push(Number(grupo_id));
+
+        }
+
+        consulta += `
+            ORDER BY a.apellido_paterno, a.apellido_materno, a.nombre
+        `;
+
+        const resultado = await pool.query(
+            consulta,
+            parametros
+        );
 
         res.json(resultado.rows);
 
