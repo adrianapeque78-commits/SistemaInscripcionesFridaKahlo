@@ -11,11 +11,11 @@ import Alert from "@mui/material/Alert";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import SchoolIcon from "@mui/icons-material/School";
 import AddIcon from "@mui/icons-material/Add";
-function Preinscripciones() {
+function Inscripciones() {
     const navigate = useNavigate();
     const [filas, setFilas] = useState([]);
     const [grupos, setGrupos] = useState([]);
-    console.log("ESTOY EN PREINSCRIPCIONES");
+    console.log("ESTOY EN Inscripciones");
     console.log("GRUPOS:", grupos);
     const [grupoSeleccionado, setGrupoSeleccionado] = useState("");
     const [alumnoSeleccionado, setAlumnoSeleccionado] = useState(null);
@@ -67,12 +67,12 @@ function Preinscripciones() {
             )
         }
     ];
-    const cargarPreinscripciones = async () => {
+    const cargarInscripciones = async () => {
 
         try {
 
             const respuesta = await fetch(
-                "https://sistemainscripcionesfridakahlo.onrender.com/inscripciones"
+                "https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones"
             );
 
             const datos = await respuesta.json();
@@ -88,9 +88,9 @@ function Preinscripciones() {
     };
     useEffect(() => {
 
-        cargarPreinscripciones();
+        cargarInscripciones();
 
-        fetch("https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/grupos")
+        fetch("https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones/grupos")
             .then(res => res.json())
             .then(data => {
 
@@ -105,7 +105,7 @@ function Preinscripciones() {
 
         <div style={{ padding: "30px" }}>
 
-            <h1>Preinscripciones</h1>
+            <h1>Inscripciones</h1>
             <p>Total de registros: {filas.length}</p>
             <div
                 style={{
@@ -119,7 +119,7 @@ function Preinscripciones() {
                     startIcon={<AddIcon />}
                     onClick={() => navigate("/inscripcion")}
                 >
-                    Nueva preinscripción
+                    Nueva inscripción
                 </Button>
             </div>
             <div className="tabla">
@@ -206,7 +206,7 @@ function Preinscripciones() {
                             onClick={async () => {
 
                                 const respuesta = await fetch(
-                                    `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${alumnoSeleccionado.id}/grupo`,
+                                    `https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones/${alumnoSeleccionado.id}/grupo`,
                                     {
                                         method: "PUT",
                                         headers: {
@@ -220,7 +220,7 @@ function Preinscripciones() {
 
                                 const datos = await respuesta.json();
 
-                                await cargarPreinscripciones();
+                                await cargarInscripciones();
 
                                 setAbrirAsignacion(false);
                                 setGrupoSeleccionado("");
@@ -276,4 +276,4 @@ function Preinscripciones() {
 
 }
 
-export default Preinscripciones;
+export default Inscripciones;

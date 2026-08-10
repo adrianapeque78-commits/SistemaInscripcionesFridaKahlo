@@ -59,7 +59,7 @@ function FormularioInscripcion() {
                     fontSize: "2rem"
                 }}
             >
-                Preinscripción Ciclo Escolar 2026-2027
+                Inscripción Ciclo Escolar 2026-2027
             </h2>
             <p
                 style={{
@@ -76,7 +76,7 @@ function FormularioInscripcion() {
                     marginBottom: "25px"
                 }}
             >
-                Llene todos los campos para finalizar su preinscripción.
+                Llene todos los campos para finalizar su inscripción.
             </p>
 
             <div className="card-form">

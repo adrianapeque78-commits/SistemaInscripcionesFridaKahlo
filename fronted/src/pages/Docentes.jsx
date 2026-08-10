@@ -112,11 +112,11 @@ function Docentes() {
                 <DataGrid
                     rows={filas}
                     columns={columnas}
-                    pageSizeOptions={[5, 10]}
+                    pageSizeOptions={[10, 20]}
                     initialState={{
                         pagination: {
                             paginationModel: {
-                                pageSize: 5
+                                pageSize: 10
                             }
                         }
                     }}

@@ -11,18 +11,18 @@ function Listados() {
     const [alumnoSeleccionado, setAlumnoSeleccionado] = useState(null);
     useEffect(() => {
 
-        fetch("http://localhost:3001/listados/grupos")
-            .then(res => res.json())
-            .then(data => {
-                setGrupos(data);
-                setCargando(false);
-            })
-            .catch(error => {
-                console.error(error);
-                setCargando(false);
-            });
+    fetch("https://sistema-inscripciones-frida-kahlo-b.vercel.app/listados/grupos")
+        .then(res => res.json())
+        .then(data => {
+            setGrupos(data);
+            setCargando(false);
+        })
+        .catch(error => {
+            console.error(error);
+            setCargando(false);
+        });
 
-    }, []);
+}, []);
     const generarPDF = (listaAlumnos) => {
         if (tipo === "directorio") {
 
@@ -60,7 +60,7 @@ function Listados() {
             autoTable(doc, {
                 startY: 45,
 
-                head: [["DATOS DEL ALUMNO", "INFORMACIÓN"]],
+                head: [["DATOS DEL ALUMNO", "INFORMACI N"]],
 
                 body: [
                     ["Folio", alumno.folio || ""],
@@ -75,7 +75,7 @@ function Listados() {
             autoTable(doc, {
                 startY: doc.lastAutoTable.finalY + 8,
 
-                head: [["MADRE", "TELÉFONO", "CORREO"]],
+                head: [["MADRE", "TEL 0FONO", "CORREO"]],
 
                 body: [[
                     alumno.madre_nombre || "",
@@ -87,7 +87,7 @@ function Listados() {
             autoTable(doc, {
                 startY: doc.lastAutoTable.finalY + 8,
 
-                head: [["PADRE", "TELÉFONO", "CORREO"]],
+                head: [["PADRE", "TEL 0FONO", "CORREO"]],
 
                 body: [[
                     alumno.padre_nombre || "",
@@ -99,7 +99,7 @@ function Listados() {
             autoTable(doc, {
                 startY: doc.lastAutoTable.finalY + 8,
 
-                head: [["CONTACTO DE EMERGENCIA", "PARENTESCO", "TELÉFONO"]],
+                head: [["CONTACTO DE EMERGENCIA", "PARENTESCO", "TEL 0FONO"]],
 
                 body: contactos.map(contacto => [
                     contacto.nombre || "",
@@ -374,7 +374,6 @@ function Listados() {
         let titulo = "";
 
         if (tipo === "oficial") titulo = "Relación Oficial SEP";
-        if (tipo === "asistencia") titulo = "Lista de Asistencia";
         if (tipo === "padron") titulo = "Padrón General";
         if (tipo === "directorio") titulo = "Directorio de Padres";
         if (tipo === "documentacion") titulo = "Documentación Pendiente";
@@ -388,34 +387,8 @@ function Listados() {
         doc.text(`${titulo} - ${nombreGrupo}`, 105, 30, {
             align: "center"
         });
-        if (tipo === "asistencia") {
 
-            autoTable(doc, {
-                startY: 40,
-                head: [[
-                    "No.",
-                    "Alumno",
-                    "L",
-                    "M",
-                    "M",
-                    "J",
-                    "V"
-                ]],
-                body: listaAlumnos.map((alumno, index) => [
-                    index + 1,
-                    `${alumno.apellido_paterno} ${alumno.apellido_materno}, ${alumno.nombre}`,
-                    "",
-                    "",
-                    "",
-                    "",
-                    ""
-                ])
-            });
-
-            doc.save(`Lista de Asistencia-${nombreGrupo}.pdf`);
-
-            return;
-        }
+        
         autoTable(doc, {
             startY: 40,
             head: [[
@@ -443,7 +416,7 @@ function Listados() {
 
         <div style={{ padding: "30px" }}>
 
-            <h1>📋 Centro de Listados</h1>
+            <h1>Centro de Listados</h1>
 
             <hr />
 
@@ -468,7 +441,6 @@ function Listados() {
                     onChange={(e) => setTipo(e.target.value)}
                 >
                     <option value="oficial">Relación Oficial SEP</option>
-                    <option value="asistencia">Lista de asistencia</option>
                     <option value="padron">Padrón general</option>
                     <option value="directorio">Directorio de padres</option>
                     <option value="documentacion">Documentación pendiente</option>
@@ -525,7 +497,7 @@ function Listados() {
                     onClick={async () => {
 
                         const respuesta = await fetch(
-                            `http://localhost:3001/listados/grupo/${grupo}`
+                            `https://sistema-inscripciones-frida-kahlo-b.vercel.app/listados/grupo/${grupo}`
                         );
 
                         const datos = await respuesta.json();
@@ -544,7 +516,6 @@ function Listados() {
                     <>
                         <h3 style={{ marginTop: "30px" }}>
                             {tipo === "oficial" && "Relación Oficial SEP"}
-                            {tipo === "asistencia" && "Lista de Asistencia"}
                             {tipo === "padron" && "Padrón General"}
                             {tipo === "directorio" && "Directorio de Padres"}
                             {tipo === "documentacion" && "Documentación Pendiente"}
@@ -614,3 +585,7 @@ function Listados() {
 }
 
 export default Listados;
+
+
+
+

@@ -683,10 +683,7 @@ const asignarGrupo = async (req, res) => {
         res.json({
             mensaje: "Grupo asignado correctamente."
         });
-        res.json({
-            mensaje: "Función asignarGrupo pendiente."
-        });
-
+        
     } catch (error) {
 
         console.error(error);
@@ -814,6 +811,7 @@ console.log("### ENTRO A obtenerAlumnos NUEVA ###");
     }
 
 };
+
 module.exports = {
     guardarInscripcion,
     obtenerGrupos,

@@ -18,7 +18,7 @@ function Reportes() {
 
         const respuestas = await Promise.all(
           grupos.map(id =>
-            fetch(`http://localhost:3001/listados/grupo/${id}`)
+            fetch(`https://sistema-inscripciones-frida-kahlo-b.vercel.app/listados/grupo/${id}`)
               .then(res => res.json())
           )
         );

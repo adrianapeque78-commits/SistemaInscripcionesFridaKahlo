@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Card from "../components/Card";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
-
+    const [totalDocentes, setTotalDocentes] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,7 +17,19 @@ function Dashboard() {
         }
 
     }, [navigate]);
+    useEffect(() => {
 
+        fetch("https://sistemainscripcionesfridakahlo.onrender.com/docentes")
+            .then(res => res.json())
+            .then(data => {
+                console.log("TOTAL DOCENTES EN DASHBOARD:", data.length);
+                setTotalDocentes(data.length);
+            })
+            .catch(error => {
+                console.error("Error al obtener docentes:", error);
+            });
+
+    }, []);
     const cerrarSesion = () => {
 
         localStorage.removeItem("usuario");
@@ -69,7 +81,7 @@ function Dashboard() {
 
                     <Card titulo="Alumnos" numero="162" />
 
-                    <Card titulo="Docentes" numero="5" />
+                    <Card titulo="Docentes" numero={totalDocentes} />
 
                     <Card titulo="Grupos" numero="6" />
 

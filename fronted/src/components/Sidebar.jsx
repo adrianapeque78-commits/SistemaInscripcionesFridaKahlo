@@ -41,7 +41,7 @@ function Sidebar() {
 
                 <NavLink to="/dashboard/preinscripciones">
                     <FaClipboardList />
-                    <span>{usuario.rol_id === 1 ? "Preinscripciones" : "Mis alumnos"}</span>
+                    <span>{usuario.rol_id === 1 ? "Inscripciones" : "Mis alumnos"}</span>
                 </NavLink>
 
                 {usuario.rol_id === 1 && (
@@ -55,7 +55,6 @@ function Sidebar() {
                             <FaChalkboardTeacher />
                             <span>Docentes</span>
                         </NavLink>
-
                         <NavLink to="/dashboard/listados">
                             <FaChartBar />
                             <span>Listados</span>
@@ -88,3 +87,6 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+
+

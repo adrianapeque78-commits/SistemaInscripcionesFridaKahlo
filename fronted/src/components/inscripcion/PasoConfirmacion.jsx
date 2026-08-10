@@ -13,7 +13,7 @@ function PasoConfirmacion({ inscripcion }) {
 
         try {
 
-            const respuesta = await fetch("https://sistemainscripcionesfridakahlo.onrender.com/inscripciones", {
+            const respuesta = await fetch("https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -30,7 +30,7 @@ function PasoConfirmacion({ inscripcion }) {
             }
         
             alert(
-            `Su preinscripción fue registrada correctamente.
+            `Su inscripción fue registrada correctamente.
 
 Folio: ${datos.folio}
 
@@ -43,7 +43,9 @@ Ese día deberá acudir con la documentación y copias solicitadas por el Jardí
 
         setConfirmado(false);
 
-        window.location.href = "/inscripcion";
+        setTimeout(() => {
+    window.location.href = "/inscripcion";
+}, 5000);
 
     } catch (error) {
 

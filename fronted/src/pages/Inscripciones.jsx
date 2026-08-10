@@ -54,7 +54,8 @@ function Inscripciones() {
 
         const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-        let url = "https://sistemainscripcionesfridakahlo.onrender.com/inscripciones";
+        let url = "https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones";
+
 
         if (usuario.rol_id === 2) {
             url += `?grupo_id=${usuario.grupo_id}`;

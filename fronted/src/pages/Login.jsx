@@ -32,7 +32,11 @@ function Login() {
 
       localStorage.setItem("usuario", JSON.stringify(datos));
       console.log(datos);
-      navigate("/dashboard");
+      if (datos.rol_id === 2) {
+  navigate("/dashboard-docente");
+} else {
+  navigate("/dashboard");
+}
 
     } catch (error) {
 

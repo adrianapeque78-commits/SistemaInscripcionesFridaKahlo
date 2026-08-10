@@ -1,10 +1,24 @@
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import "../styles/Dashboard.css";
 
 function Home() {
 
   const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const [totalDocentes, setTotalDocentes] = useState(0);
 
+  useEffect(() => {
+
+    fetch("https://sistemainscripcionesfridakahlo.onrender.com/docentes")
+      .then(res => res.json())
+      .then(data => {
+        setTotalDocentes(data.length);
+      })
+      .catch(error => {
+        console.error("Error al obtener docentes:", error);
+      });
+
+  }, []);
   if (usuario.rol_id === 2) {
 
     return (
@@ -51,7 +65,7 @@ function Home() {
 
         <Card titulo="Alumnos" numero="162" />
 
-        <Card titulo="Docentes" numero="5" />
+        <Card titulo="Docentes" numero={totalDocentes} />
 
         <Card titulo="Grupos" numero="6" />
 

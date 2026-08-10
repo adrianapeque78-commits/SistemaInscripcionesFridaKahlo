@@ -5,9 +5,9 @@ function DashboardDocente() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
+    useEffect(() => {
 
         if (!usuario) {
             navigate("/");
@@ -18,9 +18,7 @@ function DashboardDocente() {
             navigate("/dashboard");
         }
 
-    }, [navigate]);
-
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    }, [navigate, usuario?.rol_id]);
 
     return (
 
@@ -30,12 +28,47 @@ function DashboardDocente() {
 
             <h2>{usuario.nombre}</h2>
 
-            <p>Grupo asignado: {usuario.grupo_id}</p>
+            <p>
+                Grupo asignado:{" "}
+                {usuario.grupo_id === 1
+                    ? "1° A"
+                    : usuario.grupo_id === 2
+                        ? "1° B"
+                        : usuario.grupo_id === 3
+                            ? "2° A"
+                            : usuario.grupo_id === 4
+                                ? "2° B"
+                                : usuario.grupo_id === 5
+                                    ? "3° A"
+                                    : usuario.grupo_id === 6
+                                        ? "3° B"
+                                        : "Sin asignar"}
+            </p>
+
+            <button
+                onClick={() =>
+                    navigate("/dashboard-docente/documentacion")
+                }
+                style={{
+                    padding: "12px 20px",
+                    marginTop: "20px",
+                    cursor: "pointer"
+                }}
+            >
+                📋 Documentación de alumnos
+            </button>
+
+            <br />
+            <br />
 
             <button
                 onClick={() => {
                     localStorage.removeItem("usuario");
                     navigate("/");
+                }}
+                style={{
+                    padding: "10px 16px",
+                    cursor: "pointer"
                 }}
             >
                 Cerrar sesión
@@ -44,7 +77,6 @@ function DashboardDocente() {
         </div>
 
     );
-
 }
 
 export default DashboardDocente;

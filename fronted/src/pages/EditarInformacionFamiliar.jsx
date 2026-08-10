@@ -382,7 +382,11 @@ function EditarInformacionFamiliar() {
                         const datos = await respuesta.json();
 
                         alert(datos.mensaje);
-                        navigate(`/dashboard/expediente/${id}`);
+                        if (usuario.rol_id === 2) {
+                            navigate(`/dashboard-docente/alumno/${id}`);
+                        } else {
+                            navigate(`/dashboard/expediente/${id}`);
+                        }
                         setGuardando(false);
 
                     }}

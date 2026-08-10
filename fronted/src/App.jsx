@@ -18,13 +18,30 @@ import EditarInformacionFamiliar from "./pages/EditarInformacionFamiliar";
 import NuevoDocente from "./pages/NuevoDocente";
 import EditarDocente from "./pages/EditarDocente";
 import CambiarPasswordDocente from "./pages/CambiarPasswordDocente";
-
+import DashboardDocente from "./pages/DashboardDocente";
+import DocumentacionDocente from "./pages/DocumentacionDocente";
+import ExpedienteDocente from "./pages/ExpedienteDocente";
 function App() {
   return (
     <Routes>
 
       <Route path="/" element={<Login />} />
-
+      <Route
+        path="/dashboard-docente"
+        element={<DashboardDocente />}
+      />
+      <Route
+        path="/dashboard-docente/documentacion"
+        element={<DocumentacionDocente />}
+      />
+      <Route
+        path="/dashboard-docente/alumno/:id"
+        element={<ExpedienteDocente />}
+      />
+      <Route
+        path="/dashboard-docente/alumno/:id/editar"
+        element={<EditarInformacionFamiliar />}
+      />
       <Route
         path="/inscripcion"
         element={<FormularioInscripcion />}
@@ -41,7 +58,7 @@ function App() {
         <Route
           path="listados"
           element={<Listados />}
-          
+
         />
         <Route
           path="reportes"

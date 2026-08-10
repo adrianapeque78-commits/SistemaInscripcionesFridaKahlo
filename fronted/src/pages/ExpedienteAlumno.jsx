@@ -45,7 +45,7 @@ function ExpedienteAlumno() {
                                     fontWeight: "700"
                                 }}
                             >
-                                Expediente de Preinscripción
+                                Expediente de Inscripción
                             </h1>
 
                             <p style={{ margin: "8px 0 0 0", color: "#666" }}>
@@ -60,21 +60,24 @@ function ExpedienteAlumno() {
                             </button>
 
                             {usuario.rol_id === 1 && (
-                                <>
-                                    <button
-                                        onClick={() => navigate(`/dashboard/expediente/${id}/documentacion`)}
-                                    >
-                                        Documentación
-                                    </button>
-
-                                    <button
-                                        onClick={() => navigate(`/dashboard/expediente/${id}/editar`)}
-                                    >
-                                        Editar información
-                                    </button>
-                                </>
+                                <button
+                                    onClick={() =>
+                                        navigate(`/dashboard/expediente/${id}/documentacion`)
+                                    }
+                                >
+                                    Documentación
+                                </button>
                             )}
 
+                            {(usuario.rol_id === 1 || usuario.rol_id === 2) && (
+                                <button
+                                    onClick={() =>
+                                        navigate(`/dashboard/expediente/${id}/editar`)
+                                    }
+                                >
+                                    Editar información
+                                </button>
+                            )}
                         </div>
 
                     </div>
