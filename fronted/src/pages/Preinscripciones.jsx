@@ -27,7 +27,7 @@ function Inscripciones() {
         try {
 
             const respuesta = await fetch(
-                `http://localhost:3001/inscripciones/${id}`,
+                `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${id}`,
                 {
                     method: "DELETE"
                 }
