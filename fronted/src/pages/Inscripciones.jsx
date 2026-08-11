@@ -16,13 +16,6 @@ function Inscripciones() {
     const columnas = [
         { field: "folio", headerName: "Folio", width: 120 },
         { field: "nombre", headerName: "Alumno", width: 280 },
-        {
-            field: "grado",
-            headerName: "Grado",
-            width: 100,
-            renderCell: (params) =>
-                params.value ? `${params.value}°` : "—"
-        },
         { field: "grupo", headerName: "Grupo", width: 120 },
         { field: "estado", headerName: "Estado", width: 180 },
         {
@@ -61,7 +54,7 @@ function Inscripciones() {
 
         const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-        let url = "https://sistemainscripcionesfridakahlo.onrender.com/inscripciones";
+        let url = "https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones";
 
 
         if (usuario.rol_id === 2) {
@@ -72,7 +65,6 @@ function Inscripciones() {
             .then(res => res.json())
             .then(data => {
                 setFilas(data);
-                console.log("FILAS RECIBIDAS:", data);
             })
             .catch(error => console.error(error));
 
