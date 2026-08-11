@@ -75,7 +75,7 @@ function Inscripciones() {
         {
             field: "acciones",
             headerName: "Acciones",
-           width: 170,
+            width: 170,
             sortable: false,
             renderCell: (params) => (
                 <div style={{ display: "flex", gap: "8px" }}>
@@ -127,7 +127,7 @@ function Inscripciones() {
         try {
 
             const respuesta = await fetch(
-                "https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones"
+                "https://sistemainscripcionesfridakahlo.onrender.com/inscripciones"
             );
 
             const datos = await respuesta.json();
@@ -145,7 +145,7 @@ function Inscripciones() {
 
         cargarInscripciones();
 
-        fetch("https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones/grupos")
+        fetch("https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/grupos")
             .then(res => res.json())
             .then(data => {
 
@@ -261,7 +261,7 @@ function Inscripciones() {
                             onClick={async () => {
 
                                 const respuesta = await fetch(
-                                    `https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones/${alumnoSeleccionado.id}/grupo`,
+                                    `https://sistemainscripcionesfridakahlo.onrender.com/inscripciones/${alumnoSeleccionado.id}/grupo`,
                                     {
                                         method: "PUT",
                                         headers: {
@@ -332,3 +332,4 @@ function Inscripciones() {
 }
 
 export default Inscripciones;
+
