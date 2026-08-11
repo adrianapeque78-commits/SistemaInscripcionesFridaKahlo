@@ -13,7 +13,7 @@ function PasoConfirmacion({ inscripcion }) {
 
         try {
 
-            const respuesta = await fetch("https://sistema-inscripciones-frida-kahlo-b.vercel.app/inscripciones", {
+            const respuesta = await fetch("https://sistemainscripcionesfridakahlo.onrender.com/inscripciones", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
