@@ -299,7 +299,134 @@ const guardarInscripcion = async (req, res) => {
     }
 
 };
+const eliminarInscripcion = async (req, res) => {
 
+    const client = await pool.connect();
+
+    try {
+
+        await client.query("BEGIN");
+
+        const { id } = req.params;
+
+        // Obtener los tutores relacionados con el alumno
+        const tutoresResult = await client.query(
+            `
+            SELECT tutor_id
+            FROM alumno_tutor
+            WHERE alumno_id = $1
+            `,
+            [id]
+        );
+
+        const tutoresIds = tutoresResult.rows.map(
+            fila => fila.tutor_id
+        );
+
+        // Eliminar contactos de emergencia
+        await client.query(
+            `
+            DELETE FROM contactos_emergencia
+            WHERE alumno_id = $1
+            `,
+            [id]
+        );
+
+        // Eliminar documentación
+        await client.query(
+            `
+            DELETE FROM documentacion
+            WHERE alumno_id = $1
+            `,
+            [id]
+        );
+
+        // Eliminar información de salud
+        await client.query(
+            `
+            DELETE FROM salud
+            WHERE alumno_id = $1
+            `,
+            [id]
+        );
+
+        // Eliminar domicilio
+        await client.query(
+            `
+            DELETE FROM domicilios
+            WHERE alumno_id = $1
+            `,
+            [id]
+        );
+
+        // Eliminar relaciones alumno-tutor
+        await client.query(
+            `
+            DELETE FROM alumno_tutor
+            WHERE alumno_id = $1
+            `,
+            [id]
+        );
+
+        // Eliminar los tutores creados para esta inscripción
+        if (tutoresIds.length > 0) {
+
+            await client.query(
+                `
+                DELETE FROM tutores
+                WHERE id = ANY($1::int[])
+                `,
+                [tutoresIds]
+            );
+
+        }
+
+        // Finalmente eliminar al alumno
+        const alumnoResult = await client.query(
+            `
+            DELETE FROM alumnos
+            WHERE id = $1
+            RETURNING id, folio
+            `,
+            [id]
+        );
+
+        if (alumnoResult.rows.length === 0) {
+
+            await client.query("ROLLBACK");
+
+            return res.status(404).json({
+                mensaje: "Alumno no encontrado."
+            });
+
+        }
+
+        await client.query("COMMIT");
+
+        res.json({
+            mensaje: "Inscripción eliminada correctamente.",
+            folio: alumnoResult.rows[0].folio
+        });
+
+    } catch (error) {
+
+        await client.query("ROLLBACK");
+
+        console.error("ERROR AL ELIMINAR INSCRIPCIÓN:");
+        console.error(error);
+
+        res.status(500).json({
+            mensaje: "No fue posible eliminar la inscripción.",
+            error: error.message
+        });
+
+    } finally {
+
+        client.release();
+
+    }
+
+};
 const obtenerGrupos = async (req, res) => {
     try {
         const resultado = await pool.query(
@@ -339,6 +466,7 @@ const obtenerInscripciones = async (req, res) => {
             SELECT
                 a.id,
                 a.folio,
+                a.grado_solicitado AS grado,
                 CONCAT(
                     a.nombre,' ',
                     a.apellido_paterno,' ',
@@ -683,7 +811,7 @@ const asignarGrupo = async (req, res) => {
         res.json({
             mensaje: "Grupo asignado correctamente."
         });
-        
+
     } catch (error) {
 
         console.error(error);
@@ -746,7 +874,7 @@ const actualizarDocumentacion = async (req, res) => {
 
 };
 const obtenerAlumnos = async (req, res) => {
-console.log("### ENTRO A obtenerAlumnos NUEVA ###");
+    console.log("### ENTRO A obtenerAlumnos NUEVA ###");
     try {
 
         const { grupo_id } = req.query;
@@ -821,5 +949,6 @@ module.exports = {
     actualizarInformacionFamiliar,
     asignarGrupo,
     actualizarDocumentacion,
+    eliminarInscripcion,
     obtenerAlumnos
 };

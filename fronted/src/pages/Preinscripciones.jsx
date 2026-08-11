@@ -10,6 +10,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import SchoolIcon from "@mui/icons-material/School";
+import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 function Inscripciones() {
     const navigate = useNavigate();
@@ -21,6 +22,38 @@ function Inscripciones() {
     const [alumnoSeleccionado, setAlumnoSeleccionado] = useState(null);
     const [abrirAsignacion, setAbrirAsignacion] = useState(false);
     const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const eliminarInscripcion = async (id) => {
+
+        try {
+
+            const respuesta = await fetch(
+                `http://localhost:3001/inscripciones/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+            const data = await respuesta.json();
+
+            if (!respuesta.ok) {
+                throw new Error(data.mensaje || "No fue posible eliminar.");
+            }
+
+            alert(data.mensaje);
+
+            setFilas(filasActuales =>
+                filasActuales.filter(fila => fila.id !== id)
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(error.message);
+
+        }
+
+    };
     const [snackbar, setSnackbar] = useState({
         open: false,
         mensaje: "",
@@ -29,16 +62,22 @@ function Inscripciones() {
     const columnas = [
         { field: "folio", headerName: "Folio", width: 150 },
         { field: "nombre", headerName: "Alumno", width: 300 },
+        {
+            field: "grado",
+            headerName: "Grado",
+            width: 100,
+            renderCell: (params) =>
+                params.value ? `${params.value}°` : "—"
+        },
         { field: "grupo", headerName: "Grupo", width: 120 },
         { field: "estado", headerName: "Estado", width: 150 }
         ,
         {
             field: "acciones",
             headerName: "Acciones",
-            width: 120,
+           width: 170,
             sortable: false,
             renderCell: (params) => (
-
                 <div style={{ display: "flex", gap: "8px" }}>
 
                     <IconButton
@@ -51,19 +90,35 @@ function Inscripciones() {
                     </IconButton>
 
                     {usuario.rol_id === 1 && (
-                        <IconButton
-                            color="success"
-                            onClick={() => {
-                                setAlumnoSeleccionado(params.row);
-                                setAbrirAsignacion(true);
-                            }}
-                        >
-                            <SchoolIcon />
-                        </IconButton>
+                        <>
+                            <IconButton
+                                color="success"
+                                onClick={() => {
+                                    setAlumnoSeleccionado(params.row);
+                                    setAbrirAsignacion(true);
+                                }}
+                            >
+                                <SchoolIcon />
+                            </IconButton>
+
+                            <IconButton
+                                color="error"
+                                onClick={() => {
+                                    if (
+                                        window.confirm(
+                                            `¿Seguro que deseas eliminar la inscripción de ${params.row.nombre}?`
+                                        )
+                                    ) {
+                                        eliminarInscripcion(params.row.id);
+                                    }
+                                }}
+                            >
+                                <DeleteIcon />
+                            </IconButton>
+                        </>
                     )}
+
                 </div>
-
-
             )
         }
     ];

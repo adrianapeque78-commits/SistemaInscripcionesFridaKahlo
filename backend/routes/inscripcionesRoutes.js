@@ -10,6 +10,7 @@ const {
     actualizarInformacionFamiliar,
     asignarGrupo,
     actualizarDocumentacion,
+    eliminarInscripcion,
     obtenerAlumnos
 } = require("../controllers/inscripcionesController");
 
@@ -17,6 +18,7 @@ router.get("/grupos", obtenerGrupos);
 router.get("/ciclos", obtenerCiclos);
 router.get("/alumnos", obtenerAlumnos);
 router.get("/", obtenerInscripciones);
+router.delete("/:id", eliminarInscripcion);
 router.get("/:id", obtenerExpediente);
 
 router.put(
