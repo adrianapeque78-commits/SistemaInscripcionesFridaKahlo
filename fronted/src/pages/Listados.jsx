@@ -11,7 +11,7 @@ function Listados() {
     const [alumnoSeleccionado, setAlumnoSeleccionado] = useState(null);
     useEffect(() => {
 
-    fetch("https://sistema-inscripciones-frida-kahlo-b.vercel.app/listados/grupos")
+    fetch("https://sistemainscripcionesfridakahlo.onrender.com/listados/grupos")
         .then(res => res.json())
         .then(data => {
             setGrupos(data);
@@ -497,7 +497,7 @@ function Listados() {
                     onClick={async () => {
 
                         const respuesta = await fetch(
-                            `https://sistema-inscripciones-frida-kahlo-b.vercel.app/listados/grupo/${grupo}`
+                            `https://sistemainscripcionesfridakahlo.onrender.com/listados/grupo/${grupo}`
                         );
 
                         const datos = await respuesta.json();

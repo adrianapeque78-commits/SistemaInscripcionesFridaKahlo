@@ -18,7 +18,7 @@ function Reportes() {
 
         const respuestas = await Promise.all(
           grupos.map(id =>
-            fetch(`https://sistema-inscripciones-frida-kahlo-b.vercel.app/listados/grupo/${id}`)
+            fetch(`https://sistemainscripcionesfridakahlo.onrender.com/listados/grupo/${id}`)
               .then(res => res.json())
           )
         );
