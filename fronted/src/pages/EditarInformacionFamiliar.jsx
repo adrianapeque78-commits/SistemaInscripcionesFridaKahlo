@@ -43,7 +43,104 @@ function EditarInformacionFamiliar() {
                     : "Editar información familiar"}
             </h1>
             <hr />
+<h2>Datos del alumno</h2>
 
+<input
+    value={alumno.nombre ?? ""}
+    onChange={(e) =>
+        setAlumno({
+            ...alumno,
+            nombre: e.target.value
+        })
+    }
+    placeholder="Nombre"
+/>
+
+<br /><br />
+
+<input
+    value={alumno.apellido_paterno ?? ""}
+    onChange={(e) =>
+        setAlumno({
+            ...alumno,
+            apellido_paterno: e.target.value
+        })
+    }
+    placeholder="Apellido paterno"
+/>
+
+<br /><br />
+
+<input
+    value={alumno.apellido_materno ?? ""}
+    onChange={(e) =>
+        setAlumno({
+            ...alumno,
+            apellido_materno: e.target.value
+        })
+    }
+    placeholder="Apellido materno"
+/>
+
+<br /><br />
+
+<input
+    value={alumno.curp ?? ""}
+    onChange={(e) =>
+        setAlumno({
+            ...alumno,
+            curp: e.target.value.toUpperCase()
+        })
+    }
+    placeholder="CURP"
+/>
+
+<br /><br />
+
+<input
+    type="date"
+    value={alumno.fecha_nacimiento ?? ""}
+    onChange={(e) =>
+        setAlumno({
+            ...alumno,
+            fecha_nacimiento: e.target.value
+        })
+    }
+/>
+
+<br /><br />
+
+<select
+    value={alumno.sexo ?? ""}
+    onChange={(e) =>
+        setAlumno({
+            ...alumno,
+            sexo: e.target.value
+        })
+    }
+>
+    <option value="">Seleccione sexo</option>
+    <option value="Masculino">Masculino</option>
+    <option value="Femenino">Femenino</option>
+</select>
+
+<br /><br />
+
+<select
+    value={alumno.tipo_inscripcion ?? ""}
+    onChange={(e) =>
+        setAlumno({
+            ...alumno,
+            tipo_inscripcion: e.target.value
+        })
+    }
+>
+    <option value="">Seleccione tipo</option>
+    <option value="Nuevo ingreso">Nuevo ingreso</option>
+    <option value="Alumno de la casa">Alumno de la casa</option>
+</select>
+
+<hr />
             <h2>📄 Documentación</h2>
 
             <FormControlLabel
