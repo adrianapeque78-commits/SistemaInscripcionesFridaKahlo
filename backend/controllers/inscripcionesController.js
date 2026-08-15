@@ -961,8 +961,10 @@ const obtenerAlumnos = async (req, res) => {
 
                 COALESCE(doc.acta, false) AS acta,
                 COALESCE(doc.curp, false) AS curp,
+                COALESCE(doc.curp_tutor, false) AS curp_tutor,
                 COALESCE(doc.hoja_asignacion, false) AS hoja_asignacion,
                 COALESCE(doc.ine_madre, false) AS ine_madre,
+                COALESCE(doc.reporte_evaluacion, false) AS reporte_evaluacion,
                 COALESCE(doc.ine_padre, false) AS ine_padre,
                 COALESCE(doc.comprobante, false) AS comprobante
 
