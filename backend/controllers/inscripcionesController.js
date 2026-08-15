@@ -674,6 +674,32 @@ const actualizarInformacionFamiliar = async (req, res) => {
             contactos
         } = req.body;
 
+const { alumno } = req.body;
+// ALUMNO
+await client.query(
+    `
+    UPDATE alumnos
+    SET
+        nombre = $1,
+        apellido_paterno = $2,
+        apellido_materno = $3,
+        curp = $4,
+        fecha_nacimiento = $5,
+        sexo = $6,
+        tipo_inscripcion = $7
+    WHERE id = $8
+    `,
+    [
+        alumno.nombre,
+        alumno.apellidoPaterno,
+        alumno.apellidoMaterno,
+        alumno.curp,
+        alumno.fechaNacimiento,
+        alumno.sexo,
+        alumno.tipo_inscripcion,
+        id
+    ]
+);
         // DOMICILIO
         await client.query(
             `

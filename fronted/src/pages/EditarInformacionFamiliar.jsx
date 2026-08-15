@@ -354,6 +354,15 @@ function EditarInformacionFamiliar() {
                                     "Content-Type": "application/json"
                                 },
                                 body: JSON.stringify({
+                                    alumno: {
+                                        nombre: alumno.nombre,
+                                        apellidoPaterno: alumno.apellido_paterno,
+                                        apellidoMaterno: alumno.apellido_materno,
+                                        curp: alumno.curp,
+                                        fechaNacimiento: alumno.fecha_nacimiento,
+                                        sexo: alumno.sexo,
+                                        tipo_inscripcion: alumno.tipo_inscripcion
+                                    },
                                     domicilio: {
                                         calle: alumno.calle,
                                         numero: alumno.numero,
