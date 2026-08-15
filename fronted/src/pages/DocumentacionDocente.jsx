@@ -128,7 +128,7 @@ function DocumentacionDocente() {
                 <div>
 
                     <h1 style={{ margin: 0 }}>
-                        Mis alumnos
+                        Documentación de alumnos
                     </h1>
 <button
     onClick={descargarPDF}
@@ -184,88 +184,47 @@ function DocumentacionDocente() {
 
             ) : (
 
-                <div>
+                <div style={{ overflowX: "auto" }}>
 
-                    {alumnos.map((alumno) => (
-
-                        <div
-                            key={alumno.id}
-                            style={{
-                                border: "1px solid #ddd",
-                                borderRadius: "12px",
-                                padding: "20px",
-                                marginBottom: "15px",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                backgroundColor: "#fff"
-                            }}
-                        >
-
-                            <div>
-
-                                <h2
-                                    style={{
-                                        margin:
-                                            "0 0 8px 0"
-                                    }}
-                                >
-                                    {alumno.nombre}{" "}
-                                    {alumno.apellido_paterno}{" "}
-                                    {alumno.apellido_materno}
-                                </h2>
-
-                                <p
-                                    style={{
-                                        margin: "5px 0",
-                                        color: "#666"
-                                    }}
-                                >
-                                    <strong>
-                                        Folio:
-                                    </strong>{" "}
-                                    {alumno.folio}
-                                </p>
-
-                                <p
-                                    style={{
-                                        margin: "5px 0",
-                                        color: "#666"
-                                    }}
-                                >
-                                    <strong>
-                                        Grupo:
-                                    </strong>{" "}
-                                    {alumno.grupo}
-                                </p>
-<p>
-    <strong>
-        Tipo:
-    </strong>{" "}
-    {alumno.tipo_inscripcion}
-</p>
-                            </div>
-
-                            <button
-                                onClick={() =>
-                                    navigate(
-                                        `/dashboard-docente/alumno/${alumno.id}`
-                                    )
-                                }
-                                style={{
-                                    padding:
-                                        "12px 20px",
-                                    cursor: "pointer"
-                                }}
-                            >
-                                👁️ Revisar expediente
-                            </button>
-
-                        </div>
-
-                    ))}
+                    <table style={{
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        backgroundColor: "#fff"
+                    }}>
+                        <thead>
+                            <tr>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>Alumno</th>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>Acta de nacimiento</th>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>CURP</th>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>CURP del tutor</th>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>Hoja de asignación</th>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>Reporte de evaluación</th>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>INE del tutor</th>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>INE del papá</th>
+                                <th style={{ padding: "12px", border: "1px solid #ddd" }}>Comprobante de domicilio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {alumnos.map((alumno) => (
+                                <tr key={alumno.id}>
+                                    <td style={{ padding: "10px", border: "1px solid #ddd", fontWeight: "600" }}>
+                                        {alumno.apellido_paterno} {alumno.apellido_materno} {alumno.nombre}
+                                    </td>
+                                    <td style={{ textAlign: "center", border: "1px solid #ddd" }}>{alumno.acta ? "✓" : "—"}</td>
+                                    <td style={{ textAlign: "center", border: "1px solid #ddd" }}>{alumno.curp ? "✓" : "—"}</td>
+                                    <td style={{ textAlign: "center", border: "1px solid #ddd" }}>{alumno.curp_tutor ? "✓" : "—"}</td>
+                                    <td style={{ textAlign: "center", border: "1px solid #ddd" }}>{alumno.hoja_asignacion ? "✓" : "—"}</td>
+                                    <td style={{ textAlign: "center", border: "1px solid #ddd" }}>{alumno.reporte_evaluacion ? "✓" : "—"}</td>
+                                    <td style={{ textAlign: "center", border: "1px solid #ddd" }}>{alumno.ine_madre ? "✓" : "—"}</td>
+                                    <td style={{ textAlign: "center", border: "1px solid #ddd" }}>{alumno.ine_padre ? "✓" : "—"}</td>
+                                    <td style={{ textAlign: "center", border: "1px solid #ddd" }}>{alumno.comprobante ? "✓" : "—"}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
 
                 </div>
+
 
             )}
 
