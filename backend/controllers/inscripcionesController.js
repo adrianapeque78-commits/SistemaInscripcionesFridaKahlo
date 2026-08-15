@@ -537,6 +537,7 @@ const obtenerExpediente = async (req, res) => {
     a.curp,
     a.fecha_nacimiento,
     a.sexo,
+    a.tipo_inscripcion,
 
     d.calle,
     d.numero,
@@ -566,7 +567,7 @@ const obtenerExpediente = async (req, res) => {
     s.institucion,
     s.numero_afiliacion,
 
-   doc.curp,
+  doc.curp AS curp_entregado,
    doc.hoja_asignacion,
    doc.curp_tutor,
    doc.reporte_evaluacion,

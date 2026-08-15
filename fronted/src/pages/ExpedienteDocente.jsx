@@ -586,7 +586,7 @@ function ExpedienteDocente() {
 
                         <input
                             type="checkbox"
-                            checked={Boolean(alumno.curp)}
+                            checked={Boolean(alumno.curp_entregado)}
                             onChange={() =>
                                 actualizarDocumento("curp")
                             }
