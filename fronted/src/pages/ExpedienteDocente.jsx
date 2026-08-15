@@ -273,7 +273,15 @@ function ExpedienteDocente() {
                         ).toLocaleDateString("es-MX")
                         : "No registrada"}
                 </p>
+<p>
+    <strong>CURP:</strong>{" "}
+    {alumno.curp || "No registrado"}
+</p>
 
+<p>
+    <strong>Tipo:</strong>{" "}
+    {alumno.tipo_inscripcion || "No registrado"}
+</p>
                 <p>
                     <strong>Grupo:</strong>{" "}
                     {alumno.grupo || "Sin asignar"}
