@@ -20,6 +20,7 @@ import EditarDocente from "./pages/EditarDocente";
 import CambiarPasswordDocente from "./pages/CambiarPasswordDocente";
 import DashboardDocente from "./pages/DashboardDocente";
 import DocumentacionDocente from "./pages/DocumentacionDocente";
+import DocumentosDocente from "./pages/DocumentosDocente";
 import ExpedienteDocente from "./pages/ExpedienteDocente";
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
       <Route
         path="/dashboard-docente/documentacion"
         element={<DocumentacionDocente />}
+      />      <Route
+        path="/dashboard-docente/documentos"
+        element={<DocumentosDocente />}
       />
       <Route
         path="/dashboard-docente/alumno/:id"
