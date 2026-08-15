@@ -1,8 +1,42 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import SidebarDocente from "../components/SidebarDocente";
 function DocumentacionDocente() {
+    const descargarPDF = () => {
 
+        const doc = new jsPDF();
+
+        doc.setFontSize(16);
+        doc.text("JARDÍN DE NIÑOS FRIDA KAHLO", 105, 15, {
+            align: "center"
+        });
+
+        doc.setFontSize(13);
+        doc.text("Lista de alumnos", 105, 24, {
+            align: "center"
+        });
+
+        doc.setFontSize(10);
+        doc.text(`Docente: ${usuario.nombre}`, 14, 35);
+        doc.text(`Grupo: ${usuario.grupo_id}`, 14, 42);
+        doc.text(`Total de alumnos: ${alumnos.length}`, 14, 49);
+
+        autoTable(doc, {
+            startY: 57,
+            head: [["No.", "Folio", "Alumno"]],
+            body: alumnos.map((alumno, index) => [
+                index + 1,
+                alumno.folio || "",
+                `${alumno.apellido_paterno || ""} ${alumno.apellido_materno || ""} ${alumno.nombre || ""}`.trim()
+            ])
+        });
+
+        doc.save(
+            `Lista_alumnos_grupo_${usuario.grupo_id}.pdf`
+        );
+    };
     const navigate = useNavigate();
 
     const [alumnos, setAlumnos] = useState([]);
@@ -71,7 +105,9 @@ function DocumentacionDocente() {
     }
 
     return (
-
+<div className="layout">
+    <SidebarDocente />
+    <main className="layout-content">
         <div
             style={{
                 padding: "30px",
@@ -94,7 +130,16 @@ function DocumentacionDocente() {
                     <h1 style={{ margin: 0 }}>
                         Mis alumnos
                     </h1>
-
+<button
+    onClick={descargarPDF}
+    style={{
+        marginTop: "15px",
+        padding: "10px 18px",
+        cursor: "pointer"
+    }}
+>
+    📄 Descargar lista PDF
+</button>
                     <p
                         style={{
                             color: "#666",
@@ -193,7 +238,12 @@ function DocumentacionDocente() {
                                     </strong>{" "}
                                     {alumno.grupo}
                                 </p>
-
+<p>
+    <strong>
+        Tipo:
+    </strong>{" "}
+    {alumno.tipo_inscripcion}
+</p>
                             </div>
 
                             <button
@@ -219,7 +269,11 @@ function DocumentacionDocente() {
 
             )}
 
+       
         </div>
+
+    </main>
+</div>
 
     );
 }

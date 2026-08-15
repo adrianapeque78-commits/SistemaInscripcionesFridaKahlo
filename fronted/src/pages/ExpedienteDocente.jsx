@@ -580,7 +580,25 @@ function ExpedienteDocente() {
                         {" "}CURP
 
                     </label>
+<label
+    style={{
+        border: "1px solid #ddd",
+        borderRadius: "8px",
+        padding: "15px",
+        cursor: "pointer"
+    }}
+>
+    <input
+        type="checkbox"
+        checked={Boolean(alumno.curp_tutor)}
+        onChange={() =>
+            actualizarDocumento("curp_tutor")
+        }
+    />
 
+    {" "}CURP del tutor
+
+</label>
                     <label
                         style={{
                             border: "1px solid #ddd",
@@ -602,10 +620,28 @@ function ExpedienteDocente() {
                             }
                         />
 
-                        {" "}Cartilla de vacunación
+                        {" "}Hoja de asignación
 
                     </label>
+<label
+    style={{
+        border: "1px solid #ddd",
+        borderRadius: "8px",
+        padding: "15px",
+        cursor: "pointer"
+    }}
+>
+    <input
+        type="checkbox"
+        checked={Boolean(alumno.reporte_evaluacion)}
+        onChange={() =>
+            actualizarDocumento("reporte_evaluacion")
+        }
+    />
 
+    {" "}Reporte de evaluación
+
+</label>
                     <label
                         style={{
                             border: "1px solid #ddd",

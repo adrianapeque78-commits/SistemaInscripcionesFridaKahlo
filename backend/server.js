@@ -50,6 +50,37 @@ app.get("/conexion", async (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
-});
+const iniciarServidor = async () => {
+
+    try {
+
+        await pool.query(`
+            ALTER TABLE documentacion
+            ADD COLUMN IF NOT EXISTS curp_tutor BOOLEAN DEFAULT FALSE
+        `);
+
+        await pool.query(`
+            ALTER TABLE documentacion
+            ADD COLUMN IF NOT EXISTS reporte_evaluacion BOOLEAN DEFAULT FALSE
+        `);
+
+        console.log("✅ Campos de documentación verificados correctamente");
+
+    } catch (error) {
+
+        console.error(
+            "❌ Error al actualizar la estructura de documentación:",
+            error
+        );
+
+    }
+
+    app.listen(PORT, () => {
+        console.log(
+            `🚀 Servidor ejecutándose en http://localhost:${PORT}`
+        );
+    });
+
+};
+
+iniciarServidor();

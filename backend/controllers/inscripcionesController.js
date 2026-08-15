@@ -566,13 +566,14 @@ const obtenerExpediente = async (req, res) => {
     s.institucion,
     s.numero_afiliacion,
 
-    doc.acta,
-    doc.curp,
-    doc.hoja_asignacion,
-    doc.ine_madre,
-    doc.ine_padre,
-    doc.comprobante,
-    doc.observaciones,
+   doc.curp,
+   doc.hoja_asignacion,
+   doc.curp_tutor,
+   doc.reporte_evaluacion,
+   doc.ine_madre,
+   doc.ine_padre,
+   doc.comprobante,
+   doc.observaciones,
 
     g.nombre AS grupo,
     c.nombre AS ciclo
@@ -672,6 +673,7 @@ const actualizarInformacionFamiliar = async (req, res) => {
             contactos
         } = req.body;
 
+        // DOMICILIO
         await client.query(
             `
             UPDATE domicilios
@@ -694,71 +696,105 @@ const actualizarInformacionFamiliar = async (req, res) => {
                 id
             ]
         );
+
+        // MADRE
         await client.query(
             `
-    UPDATE tutores
-    SET
-        nombre = $1,
-        telefono = $2
-    WHERE id = (
-        SELECT tutor_id
-        FROM alumno_tutor
-        WHERE alumno_id = $3
-        AND parentesco = 'Madre'
-    )
-    `,
+            UPDATE tutores
+            SET
+                nombre = $1,
+                curp = $2,
+                telefono = $3,
+                correo = $4,
+                ocupacion = $5,
+                escolaridad = $6
+            WHERE id = (
+                SELECT tutor_id
+                FROM alumno_tutor
+                WHERE alumno_id = $7
+                AND parentesco = 'Madre'
+            )
+            `,
             [
                 madre.nombre,
+                madre.curp,
                 madre.telefono,
+                madre.correo,
+                madre.ocupacion,
+                madre.escolaridad,
                 id
             ]
         );
+
+        // PADRE
         await client.query(
             `
-    UPDATE tutores
-    SET
-        nombre = $1,
-        telefono = $2
-    WHERE id = (
-        SELECT tutor_id
-        FROM alumno_tutor
-        WHERE alumno_id = $3
-        AND parentesco = 'Padre'
-    )
-    `,
+            UPDATE tutores
+            SET
+                nombre = $1,
+                curp = $2,
+                telefono = $3,
+                correo = $4,
+                ocupacion = $5,
+                escolaridad = $6
+            WHERE id = (
+                SELECT tutor_id
+                FROM alumno_tutor
+                WHERE alumno_id = $7
+                AND parentesco = 'Padre'
+            )
+            `,
             [
                 padre.nombre,
+                padre.curp,
                 padre.telefono,
+                padre.correo,
+                padre.ocupacion,
+                padre.escolaridad,
                 id
             ]
         );
+
+        // SALUD
         await client.query(
             `
-    UPDATE salud
-    SET
-        alergias = $1,
-        padecimientos = $2
-    WHERE alumno_id = $3
-    `,
+            UPDATE salud
+            SET
+                tipo_sangre = $1,
+                alergias = $2,
+                padecimientos = $3,
+                servicio_medico = $4,
+                institucion = $5,
+                numero_afiliacion = $6
+            WHERE alumno_id = $7
+            `,
             [
+                salud.tipo_sangre,
                 salud.alergias,
                 salud.padecimientos,
+                salud.servicio_medico,
+                salud.institucion,
+                salud.numero_afiliacion,
                 id
             ]
         );
-        for (const contacto of contactos) {
+
+        // CONTACTOS DE EMERGENCIA
+        for (const contacto of contactos || []) {
 
             await client.query(
                 `
-        UPDATE contactos_emergencia
-        SET
-            nombre = $1,
-            telefono = $2
-        WHERE alumno_id = $3
-        AND orden = $4
-        `,
+                UPDATE contactos_emergencia
+                SET
+                    nombre = $1,
+                    parentesco = $2,
+                    telefono = $3
+                WHERE alumno_id = $4
+                AND orden = $5
+                `,
                 [
                     contacto.nombre,
+                    contacto.parentesco,
                     contacto.telefono,
                     id,
                     contacto.orden
@@ -766,13 +802,8 @@ const actualizarInformacionFamiliar = async (req, res) => {
             );
 
         }
-        await client.query("COMMIT");
-        const resultado = await client.query(
-            "SELECT * FROM domicilios WHERE alumno_id = $1",
-            [id]
-        );
 
-        console.log(resultado.rows[0]);
+        await client.query("COMMIT");
 
         res.json({
             mensaje: "Información actualizada correctamente"
@@ -795,6 +826,7 @@ const actualizarInformacionFamiliar = async (req, res) => {
     }
 
 };
+
 const asignarGrupo = async (req, res) => {
 
     try {
@@ -832,9 +864,12 @@ const actualizarDocumentacion = async (req, res) => {
         const {
             acta_nacimiento,
             curp_entregado,
-            cartilla_vacunacion,
-            ine_tutor,
-            comprobante_domicilio,
+            hoja_asignacion,
+            curp_tutor,
+            reporte_evaluacion,
+            ine_madre,
+            ine_padre,
+            comprobante_domicilio
         } = req.body;
 
         await pool.query(
@@ -844,22 +879,28 @@ const actualizarDocumentacion = async (req, res) => {
                 acta = $1,
                 curp = $2,
                 hoja_asignacion = $3,
-                ine_madre = $4,
-                comprobante = $5
-            WHERE alumno_id = $6
+                curp_tutor = $4,
+                reporte_evaluacion = $5,
+                ine_madre = $6,
+                ine_padre = $7,
+                comprobante = $8
+            WHERE alumno_id = $9
             `,
             [
                 acta_nacimiento,
                 curp_entregado,
-                cartilla_vacunacion,
-                ine_tutor,
+                hoja_asignacion,
+                curp_tutor,
+                reporte_evaluacion,
+                ine_madre,
+                ine_padre,
                 comprobante_domicilio,
                 id
             ]
         );
 
         res.json({
-            mensaje: "Documento entregado"
+            mensaje: "Documentación actualizada correctamente"
         });
 
     } catch (error) {
@@ -886,6 +927,8 @@ const obtenerAlumnos = async (req, res) => {
                 a.nombre,
                 a.apellido_paterno,
                 a.apellido_materno,
+                a.grado_solicitado AS grado,
+                a.tipo_inscripcion,
                 g.id AS grupo_id,
                 g.nombre AS grupo,
 
