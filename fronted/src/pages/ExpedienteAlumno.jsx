@@ -94,6 +94,10 @@ function ExpedienteAlumno() {
                         {new Date(alumno.fecha_nacimiento).toLocaleDateString("es-MX")}
                     </p>
 
+                    <p><strong>CURP:</strong> {alumno.curp || "No registrado"}</p>
+
+                    <p><strong>Tipo:</strong> {alumno.tipo_inscripcion || "No registrado"}</p>
+
                     <p><strong>Grupo:</strong> {alumno.grupo ?? "Sin asignar"}</p>
 
                     <p><strong>Ciclo Escolar:</strong> {alumno.ciclo ?? "Sin asignar"}</p>
