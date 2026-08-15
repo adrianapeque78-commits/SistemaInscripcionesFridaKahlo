@@ -78,15 +78,28 @@ function ExpedienteDocente() {
                         ? nuevoValor
                         : Boolean(alumno.curp),
 
-                cartilla_vacunacion:
+                hoja_asignacion:
                     campo === "hoja_asignacion"
                         ? nuevoValor
                         : Boolean(alumno.hoja_asignacion),
 
-                ine_tutor:
+                curp_tutor:
+                    campo === "curp_tutor"
+                        ? nuevoValor
+                        : Boolean(alumno.curp_tutor),
+
+                reporte_evaluacion:
+                    campo === "reporte_evaluacion"
+                        ? nuevoValor
+                        : Boolean(alumno.reporte_evaluacion),
+
+                ine_madre:
                     campo === "ine_madre"
                         ? nuevoValor
                         : Boolean(alumno.ine_madre),
+
+                ine_padre:
+                    Boolean(alumno.ine_padre),
 
                 comprobante_domicilio:
                     campo === "comprobante"
@@ -127,6 +140,8 @@ function ExpedienteDocente() {
         }
 
     };
+
+
 
     if (cargando) {
 
@@ -580,25 +595,25 @@ function ExpedienteDocente() {
                         {" "}CURP
 
                     </label>
-<label
-    style={{
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        padding: "15px",
-        cursor: "pointer"
-    }}
->
-    <input
-        type="checkbox"
-        checked={Boolean(alumno.curp_tutor)}
-        onChange={() =>
-            actualizarDocumento("curp_tutor")
-        }
-    />
+                    <label
+                        style={{
+                            border: "1px solid #ddd",
+                            borderRadius: "8px",
+                            padding: "15px",
+                            cursor: "pointer"
+                        }}
+                    >
+                        <input
+                            type="checkbox"
+                            checked={Boolean(alumno.curp_tutor)}
+                            onChange={() =>
+                                actualizarDocumento("curp_tutor")
+                            }
+                        />
 
-    {" "}CURP del tutor
+                        {" "}CURP del tutor
 
-</label>
+                    </label>
                     <label
                         style={{
                             border: "1px solid #ddd",
@@ -623,25 +638,25 @@ function ExpedienteDocente() {
                         {" "}Hoja de asignación
 
                     </label>
-<label
-    style={{
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        padding: "15px",
-        cursor: "pointer"
-    }}
->
-    <input
-        type="checkbox"
-        checked={Boolean(alumno.reporte_evaluacion)}
-        onChange={() =>
-            actualizarDocumento("reporte_evaluacion")
-        }
-    />
+                    <label
+                        style={{
+                            border: "1px solid #ddd",
+                            borderRadius: "8px",
+                            padding: "15px",
+                            cursor: "pointer"
+                        }}
+                    >
+                        <input
+                            type="checkbox"
+                            checked={Boolean(alumno.reporte_evaluacion)}
+                            onChange={() =>
+                                actualizarDocumento("reporte_evaluacion")
+                            }
+                        />
 
-    {" "}Reporte de evaluación
+                        {" "}Reporte de evaluación
 
-</label>
+                    </label>
                     <label
                         style={{
                             border: "1px solid #ddd",
