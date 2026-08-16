@@ -36,7 +36,7 @@ function SidebarDocente() {
                     }
                 >
                     <FaUserGraduate />
-                    navigate("/dashboard-docente")
+                    <span>Mis alumnos</span>
                 </button>
 
                 <button
