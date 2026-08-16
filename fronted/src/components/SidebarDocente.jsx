@@ -41,7 +41,7 @@ function SidebarDocente() {
 
                 <button
                     onClick={() =>
-                        navigate("/dashboard-docente/documentacion")
+                        navigate("/dashboard-docente/documentos")
                     }
                 >
                     <FaFileAlt />
