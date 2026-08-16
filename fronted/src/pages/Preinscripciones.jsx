@@ -124,23 +124,28 @@ function Inscripciones() {
     ];
     const cargarInscripciones = async () => {
 
-        try {
+    try {
 
-            const respuesta = await fetch(
-                "https://sistemainscripcionesfridakahlo.onrender.com/inscripciones"
-            );
+        let url =
+            "https://sistemainscripcionesfridakahlo.onrender.com/inscripciones";
 
-            const datos = await respuesta.json();
-
-            setFilas(datos);
-
-        } catch (error) {
-
-            console.error(error);
-
+        if (usuario.rol_id === 2) {
+            url += `?grupo_id=${usuario.grupo_id}`;
         }
 
-    };
+        const respuesta = await fetch(url);
+
+        const datos = await respuesta.json();
+
+        setFilas(datos);
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+};
     useEffect(() => {
 
         cargarInscripciones();
@@ -154,7 +159,7 @@ function Inscripciones() {
             })
             .catch(console.error);
 
-    }, []);
+   }, [usuario?.grupo_id, usuario?.rol_id]);
 
     return (
 

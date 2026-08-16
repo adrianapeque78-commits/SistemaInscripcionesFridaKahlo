@@ -32,15 +32,6 @@ function SidebarDocente() {
 
                 <button
                     onClick={() =>
-                        navigate("/dashboard-docente/documentacion")
-                    }
-                >
-                    <FaUserGraduate />
-                    <span>Mis alumnos</span>
-                </button>
-
-                <button
-                    onClick={() =>
                         navigate("/dashboard-docente/documentos")
                     }
                 >

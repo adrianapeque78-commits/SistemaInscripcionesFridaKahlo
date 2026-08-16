@@ -39,10 +39,20 @@ function Sidebar() {
                     <span>Inicio</span>
                 </NavLink>
 
-                <NavLink to="/dashboard/preinscripciones">
-                    <FaClipboardList />
-                    <span>{usuario.rol_id === 1 ? "Inscripciones" : "Mis alumnos"}</span>
-                </NavLink>
+                <NavLink
+    to={
+        usuario.rol_id === 1
+            ? "/dashboard/preinscripciones"
+            : "/dashboard-docente/documentacion"
+    }
+>
+    <FaClipboardList />
+    <span>
+        {usuario.rol_id === 1
+            ? "Inscripciones"
+            : "Mis alumnos"}
+    </span>
+</NavLink>
 
                 {usuario.rol_id === 1 && (
                     <>

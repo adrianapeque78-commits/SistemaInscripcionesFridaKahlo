@@ -1,60 +1,63 @@
-function PasoDocumentacion({ inscripcion, setInscripcion }) {
-
-    const actualizarDocumentacion = (campo, valor) => {
-        setInscripcion({
-            ...inscripcion,
-            documentacion: {
-                ...inscripcion.documentacion,
-                [campo]: valor
-            }
-        });
-    };
+function PasoDocumentacion({ inscripcion }) {
 
     const esNuevoIngreso =
         inscripcion.alumno.tipo_inscripcion === "Nuevo ingreso";
+
+    const grado = Number(inscripcion.alumno.grado_solicitado || 0);
+
+    const requiereEvaluacion =
+        grado === 2 || grado === 3;
 
     return (
         <>
             <h2>Documentación a presentar</h2>
 
             <p>
-                El día de la inscripción deberá presentar la siguiente documentación para su cotejo y validación.
+                El día de la inscripción deberá presentar la siguiente
+                documentación para su cotejo y validación.
             </p>
 
             <div className="grid">
 
                 <div>
-
-                    <p>☐ Acta de nacimiento del alumno.</p>
+                    <p>☐ Acta de nacimiento original.</p>
                 </div>
 
                 <div>
-
-                    <p>☐ CURP del alumno.</p>
+                    <p>☐ CURP del alumno actualizado.</p>
                 </div>
+
                 {esNuevoIngreso && (
                     <div>
-
-                        <p>☐ Hoja de asignación SEP (solo para alumnos de nuevo ingreso).</p>
+                        <p>
+                            ☐ Hoja de asignación SEP.
+                        </p>
                     </div>
                 )}
-                <div>
 
-                    <p>☐ Identificación oficial vigente de la madre.</p>
+                <div>
+                    <p>☐ CURP del tutor actualizado.</p>
                 </div>
 
                 <div>
-
-                    <p>☐ Identificación oficial vigente del padre.</p>
+                    <p>☐ INE del tutor.</p>
                 </div>
+
+                {requiereEvaluacion && (
+                    <div>
+                        <p>
+                            ☐ Reporte de evaluaciones según sea el caso
+                            (solo para quienes ingresan a 2° y 3°).
+                        </p>
+                    </div>
+                )}
 
                 <div>
-
-                    <p>☐ Comprobante de domicilio reciente.</p>
+                    <p>☐ Comprobante domiciliario.</p>
                 </div>
-
 
             </div>
+
             <div
                 style={{
                     marginTop: "20px",
@@ -65,8 +68,9 @@ function PasoDocumentacion({ inscripcion, setInscripcion }) {
                 }}
             >
                 <strong>Importante:</strong><br />
-                La documentación será revisada físicamente el día de la inscripción.
-                Presente original y copia de los documentos solicitados.
+                La documentación será revisada físicamente el día de la
+                inscripción. Presente original y copia de los documentos
+                solicitados.
             </div>
         </>
     );

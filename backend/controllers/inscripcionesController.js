@@ -538,6 +538,8 @@ const obtenerExpediente = async (req, res) => {
     a.fecha_nacimiento,
     a.sexo,
     a.tipo_inscripcion,
+    a.grado_solicitado,
+    a.ciclo_escolar_id,
 
     d.calle,
     d.numero,
@@ -567,7 +569,8 @@ const obtenerExpediente = async (req, res) => {
     s.institucion,
     s.numero_afiliacion,
 
-  doc.curp AS curp_entregado,
+   doc.acta,
+   doc.curp AS curp_entregado,
    doc.hoja_asignacion,
    doc.curp_tutor,
    doc.reporte_evaluacion,
@@ -674,10 +677,10 @@ const actualizarInformacionFamiliar = async (req, res) => {
             contactos
         } = req.body;
 
-const { alumno } = req.body;
-// ALUMNO
-await client.query(
-    `
+        const { alumno } = req.body;
+        // ALUMNO
+        await client.query(
+            `
     UPDATE alumnos
     SET
         nombre = $1,
@@ -689,17 +692,17 @@ await client.query(
         tipo_inscripcion = $7
     WHERE id = $8
     `,
-    [
-        alumno.nombre,
-        alumno.apellidoPaterno,
-        alumno.apellidoMaterno,
-        alumno.curp,
-        alumno.fechaNacimiento,
-        alumno.sexo,
-        alumno.tipo_inscripcion,
-        id
-    ]
-);
+            [
+                alumno.nombre,
+                alumno.apellidoPaterno,
+                alumno.apellidoMaterno,
+                alumno.curp,
+                alumno.fechaNacimiento,
+                alumno.sexo,
+                alumno.tipo_inscripcion,
+                id
+            ]
+        );
         // DOMICILIO
         await client.query(
             `
@@ -785,23 +788,23 @@ await client.query(
         // SALUD
         await client.query(
             `
-            UPDATE salud
-            SET
-                tipo_sangre = $1,
-                alergias = $2,
-                padecimientos = $3,
-                servicio_medico = $4,
-                institucion = $5,
-                numero_afiliacion = $6
-            WHERE alumno_id = $7
-            `,
+    UPDATE salud
+    SET
+        tipo_sangre = $1,
+        alergias = $2,
+        padecimientos = $3,
+        servicio_medico = $4,
+        institucion = $5,
+        numero_afiliacion = $6
+    WHERE alumno_id = $7
+    `,
             [
-                salud.tipo_sangre,
+                salud.tipoSangre,
                 salud.alergias,
                 salud.padecimientos,
-                salud.servicio_medico,
+                salud.servicioMedico,
                 salud.institucion,
-                salud.numero_afiliacion,
+                salud.numeroAfiliacion,
                 id
             ]
         );

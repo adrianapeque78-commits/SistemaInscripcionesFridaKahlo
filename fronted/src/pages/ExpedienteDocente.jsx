@@ -99,7 +99,7 @@ function ExpedienteDocente() {
                         : Boolean(alumno.ine_madre),
 
                 ine_padre:
-                    Boolean(alumno.ine_padre),
+                    campo === "ine_padre" ? nuevoValor : Boolean(alumno.ine_padre),
 
                 comprobante_domicilio:
                     campo === "comprobante"
@@ -212,7 +212,7 @@ function ExpedienteDocente() {
 
                 <button
                     onClick={() =>
-                        navigate("/dashboard-docente")
+                        navigate("/dashboard-docente/documentacion")
                     }
                     style={{
                         padding: "10px 18px",
@@ -273,15 +273,15 @@ function ExpedienteDocente() {
                         ).toLocaleDateString("es-MX")
                         : "No registrada"}
                 </p>
-<p>
-    <strong>CURP:</strong>{" "}
-    {alumno.curp || "No registrado"}
-</p>
+                <p>
+                    <strong>CURP:</strong>{" "}
+                    {alumno.curp || "No registrado"}
+                </p>
 
-<p>
-    <strong>Tipo:</strong>{" "}
-    {alumno.tipo_inscripcion || "No registrado"}
-</p>
+                <p>
+                    <strong>Tipo:</strong>{" "}
+                    {alumno.tipo_inscripcion || "No registrado"}
+                </p>
                 <p>
                     <strong>Grupo:</strong>{" "}
                     {alumno.grupo || "Sin asignar"}
